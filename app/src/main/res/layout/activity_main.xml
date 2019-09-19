@@ -20,12 +20,19 @@
         android:layout_above="@id/buttonsLayout"
         android:gravity="center"
         android:orientation="vertical">
+
         <ca.vitos.sudoku.view.custom.SudokuAnother
             android:id="@+id/sudoku"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:focusable="true"
-
+            android:nextFocusDown="@id/focusHook"
+            />
+        <View
+            android:id="@+id/focusHook"
+            android:layout_width="1dp"
+            android:layout_height="1dp"
+            android:focusable="true"
             />
     </LinearLayout>
     <GridLayout

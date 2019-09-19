@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ca.vitos.sudoku.R
@@ -21,13 +22,21 @@ class MainActivity : AppCompatActivity(), SudokuAnother.OnToucListener {
         setContentView(R.layout.activity_main)
 
         sudoku.requestFocus()
-
+        sudoku.isClickable = true
         sudoku.registerListener(this)
 
         sudoku.contentDescription = "Sudoku View"
 
         viewModel = ViewModelProviders.of(this).get(PlaySudokuViewModel::class.java)
         viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer { updateSelectedCellUI(it) })
+
+        focusHook.setOnFocusChangeListener { view, b ->
+            run {
+
+                Log.d("KeyPressTest", "Has Focus Dummy")
+                sudoku.requestFocus()
+            }
+        }
     }
 
     private fun updateSelectedCellUI(cell: Pair<Int,Int>?) = cell?.let {
