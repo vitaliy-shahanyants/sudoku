@@ -2,6 +2,8 @@ package ca.vitos.sudoku.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
+import android.view.KeyEvent
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import ca.vitos.sudoku.R
@@ -22,6 +24,8 @@ class MainActivity : AppCompatActivity(), SudokuAnother.OnToucListener {
 
         sudoku.registerListener(this)
 
+        sudoku.contentDescription = "Sudoku View"
+
         viewModel = ViewModelProviders.of(this).get(PlaySudokuViewModel::class.java)
         viewModel.sudokuGame.selectedCellLiveData.observe(this, Observer { updateSelectedCellUI(it) })
     }
@@ -31,5 +35,10 @@ class MainActivity : AppCompatActivity(), SudokuAnother.OnToucListener {
     }
     override fun onCellTouched(row: Int, col: Int) {
         viewModel.sudokuGame.updateSelectedCell(row,col)
+    }
+
+    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
+        Log.d("KeyPressTest","The hkey was pressed ")
+        return false
     }
 }

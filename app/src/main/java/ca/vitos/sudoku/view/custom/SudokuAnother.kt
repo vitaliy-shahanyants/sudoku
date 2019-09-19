@@ -9,6 +9,7 @@ import android.util.Log
 import android.view.KeyEvent
 import android.view.MotionEvent
 import android.view.View
+import android.view.accessibility.AccessibilityEvent
 import kotlin.math.min
 
 class SudokuAnother @JvmOverloads constructor(
@@ -134,6 +135,11 @@ class SudokuAnother @JvmOverloads constructor(
             else -> false
 
         }
+    }
+
+    override fun dispatchPopulateAccessibilityEvent(event: AccessibilityEvent?): Boolean {
+        Log.d("KeyPressTest","Leaving the view dispatchPopulateAccessibilityEvent")
+        return super.dispatchPopulateAccessibilityEvent(event)
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
