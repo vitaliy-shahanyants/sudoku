@@ -171,6 +171,40 @@ class SudokuAnother @JvmOverloads constructor(
     fun registerListener (listener: SudokuAnother.OnToucListener){
         this.listener = listener
     }
+
+    fun handleKeyEvent(event: KeyEvent): Boolean{
+
+        Log.d("KeyPressTest","Handle Key Event BLah Blah")
+
+        return when (event.action) {
+            KeyEvent.KEYCODE_DPAD_DOWN -> {
+                if (selectedRow > size)
+                    selectedRow++
+                Log.d("KeyPressTest","I'm prissing down now")
+                invalidate()
+                true
+            }
+            KeyEvent.KEYCODE_DPAD_UP -> {
+                if ( selectedRow > -1 )
+                    selectedRow--
+                invalidate()
+                false
+            }
+            KeyEvent.KEYCODE_DPAD_LEFT -> {
+
+                invalidate()
+                false
+            }
+            KeyEvent.KEYCODE_DPAD_RIGHT -> {
+
+                invalidate()
+                false
+            }
+            else -> false
+
+        }
+    }
+
     interface OnToucListener {
         fun onCellTouched(row: Int, col: Int)
     }

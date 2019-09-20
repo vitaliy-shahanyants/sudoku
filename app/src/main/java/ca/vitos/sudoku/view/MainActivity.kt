@@ -39,6 +39,10 @@ class MainActivity : AppCompatActivity(), SudokuAnother.OnToucListener {
         }
     }
 
+    override fun onBackPressed() {
+        super.onBackPressed()
+    }
+
     private fun updateSelectedCellUI(cell: Pair<Int,Int>?) = cell?.let {
         sudoku.updateSelectedCellUI(cell.first,cell.second)
     }
@@ -46,8 +50,7 @@ class MainActivity : AppCompatActivity(), SudokuAnother.OnToucListener {
         viewModel.sudokuGame.updateSelectedCell(row,col)
     }
 
-    override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
-        Log.d("KeyPressTest","The hkey was pressed ")
-        return false
+    override fun onKeyDown(keyCode: Int, event: KeyEvent): Boolean {
+        return sudoku.handleKeyEvent(event)
     }
 }
